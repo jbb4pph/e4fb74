@@ -1,14 +1,9 @@
 import {Graph} from "./fetchGraph";
 
-type Response = {
-  result: Graph
-  details?: string
-}
-
 export const fetchData = async (
   url: string,
   query?: Record<string, any>
-): Promise<Response> => {
+): Promise<Graph> => {
 
   try {
     const params: string = (() => {
@@ -25,7 +20,7 @@ export const fetchData = async (
       );
     }
 
-    const data: Response = await response.json();
+    const data: Graph = await response.json();
     return data;
   } catch (error) {
     console.error("Error in fetchData:", error);

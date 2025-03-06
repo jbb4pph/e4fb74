@@ -1,5 +1,9 @@
 import {fetchData} from "./fetchData";
 
+export type Branch = {
+
+}
+
 export type Graph = {
   $schema: string;
   blueprint_id: string;
@@ -17,8 +21,8 @@ export type Graph = {
     edges?: {
       source: string;
       target: string;
-    };
-  };
+    }[];
+  }[];
   forms?: {
     $schema: string;
     custom_javascript?: string;
@@ -30,14 +34,13 @@ export type Graph = {
     name: string;
     ui_schema?: object;
     vendor_schema?: Record<string, any>;
-  };
-
+  }[];
   nodes?: {
-    data: object;
+    data: Record<string, string>;
     id: string;
-    position: object;
+    position: { x: number, y: number };
     type: "form" | "branch" | "trigger" | "configuration";
-  };
+  }[];
   status: "draft" | "published" | "historical" | "archived";
   tenant_id: string;
   triggers?: {
@@ -57,7 +60,7 @@ export type Graph = {
     timeout_seconds?: number;
     trigger_service_id: string;
     updated_at: string;
-  };
+  }[];
   version_id: string;
   version_notes: string;
   version_number: string;
@@ -73,7 +76,8 @@ export const fetchGraph = async (
   const url = `/api/v1/${tenant}/actions/blueprints/${blueprint}:${version}/graph`;
   return await fetchData(url)
     .then(response => {
-      return response.result;
+      console.log(response)
+      return response;
     });
 }
 
