@@ -1,3 +1,17 @@
+# Usage
+
+### Install
+`npm install`
+
+### Run Backend Dev Server
+`npm run dev`
+
+### Run Frontend Dev Server
+`npm run start`
+
+The frontend is served at https://localhost:3001.
+
+
 # Journey Builder React Coding Challenge
 
 In this challenge, you will reimplement a small portion of an app we’re currently building at Avantos. The portion you’ll work on is a node-based UI that shows a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph) of forms:
