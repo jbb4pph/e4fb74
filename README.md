@@ -1,15 +1,46 @@
 # Usage
 
-### Install
+To run this locally, you need to start the front-end and back-end dev servers:
+
+### Step 1. Install
 `npm install`
 
-### Run Backend Dev Server
+### Step 2. Run Backend Dev Server
 `npm run dev`
 
-### Run Frontend Dev Server
+### Step 3. Run Frontend Dev Server
 `npm run start`
 
 The frontend is served at https://localhost:3001.
+
+
+# Extensibility
+
+### Add a New Data Source
+Add a new function to the `DATA_SOURCES` array in `App.tsx`.
+
+`src/App.tsx`:
+```
+const DATA_SOURCES: GraphDataSource[] = [
+  fetchGraph("bp_456", "bpv_123", "tenant_123"),
+  ...
+]
+
+```
+
+# Patterns
+
+### Object Maps / Lookup Tables
+When graph data is loaded, it is used to populate lookup tables (which have names like `nodeMap`, `edgeMap`, etc). This makes it easier and more efficient to do lookups by ID. In most cases, JavaScript object property access is average-case O(1) time.
+
+### Traversing the DAG
+There's a function in `ConfigPrefillForm` called `getPrereqs()` that recursively traverses the DAG to find unique prerequisite forms.
+
+### Reusable Components
+As an example: The common modal-window behavior has been abstracted into a single hook `useModal` that was used for both modal windows.
+
+### Adapter Pattern
+Any datasource can be added as long as it satisfies the `Graph` interface. There's an adapter called `processAvantosGraph` which adapts the Avantos graph data to this interface.
 
 
 # Journey Builder React Coding Challenge
