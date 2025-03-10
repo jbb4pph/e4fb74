@@ -1,38 +1,31 @@
-import React from 'react';
-import {Branch, fetchGraph, Graph} from '../lib/data';
-import { ReactFlow, Background, Controls } from '@xyflow/react';
+import { ReactFlow, Background, Controls, Node, Edge } from '@xyflow/react';
+import {AvantosNode} from './AvantosNode';
 
-export const FlowChart = () => {
+export const nodeTypes = {
+  form: AvantosNode,
+};
 
-  const [graph, setGraph] = React.useState<Graph>();
+type Props = {
+  edges?: Edge[]
+  nodes: Node[]
+};
 
-  React.useEffect(() => {
-    const data = fetchGraph("bp_456", "bpv_123", "bpv_123")
-      .then(graph => {
-        setGraph({
-          ...graph,
-          nodes: graph.nodes?.map(n => ({
-            ...n,
-            data: {
-              ...n.data,
-              label: n.data.name
-            },
-            position: { ...n.position, x: n.position.x - 1000 }
-          }))
-        });
-      })
-      .catch(e => console.error(e));
-  }, []);
+/**
+ * @method FlowChart
+ * Renders the main flow chart.
+ **/
+export const FlowChart = (props: Props) => {
 
-  console.log(graph)
-  if (!graph?.nodes) return null;
+  if (!props?.nodes) return null;
   return (
     <div className="chart-wrap">
-      <aside>
-
-      </aside>
       <div style={{ height: '100vh'}}>
-        <ReactFlow nodes={graph.nodes}>
+        <ReactFlow
+          nodes={props.nodes}
+          edges={props.edges}
+          nodeTypes={nodeTypes}
+          fitView
+        >
           <Background />
           <Controls />
         </ReactFlow>

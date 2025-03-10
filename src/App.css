@@ -13,6 +13,13 @@
   }
 }
 
+h1, h2, h3, p, div, span, aside {
+  line-height: 1.3;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -41,18 +48,297 @@
   display: flex;
   flex-wrap: nowrap;
 
-  & > aside,
   & > div {
     flex-grow: 0;
     flex-shrink: 0;
+    width: 100vw;
+  }
+}
 
-    &:first-child {
-      width: 20vw;
-      background: #eeeef3;
+.chart-wrap {
+  .avantos-form-node {
+    border: 1px solid #ccc;
+    padding: 0.3rem;
+    border-radius: 7px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+    letter-spacing: 0.03rem;
+    background-color: rgba(255,255,255,1);
+    height: 2.5rem;
+    width: 10rem;
+    display: block;
+    text-align: left;
+
+    .icon,
+    .text {
+      height: 100%;
+      display: inline-block;
+      vertical-align: top;
     }
 
-    &:last-child {
-      width: 80vw;
+    .icon {
+      width: 2.5rem;
+      text-align: center;
+      border-radius: 7px;
+      background-color: #707ff5;
+      margin-right: 0.5rem;
+
+      svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        position: relative;
+        top: 50%;
+        stroke: #fff;
+        transform: translateY(-50%);
+      }
+    }
+
+    .text {
+      width: 62%;
+    }
+
+    .type-label {
+      margin-top: 0.2rem;
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #888;
+    }
+  }
+}
+
+.prefill-form,
+.config-prefill-form {
+  position: fixed;
+  border-radius: 10px;
+  box-shadow: 0 0 0.25rem 0.15rem rgba(0,0,0,0.1);
+  top: 4rem;
+  bottom: 3rem;
+  z-index: 2;
+  padding: 1rem;
+  text-align: left;
+  width: calc(50vw - 7rem);
+  background-color: rgba(255,255,255,1);
+  overflow-y: auto;
+
+  .heading {
+    position: relative;
+    h1 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+
+    p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #555;
+
+      &.form-id {
+        font-weight: 400;
+        margin-top: 0.5rem;
+      }
+    }
+    button.close {
+      width: 1rem;
+      height: 1rem;
+      color: #fff;
+      background: indianred;
+      border: 0;
+      outline: 0;
+      position: absolute;
+      right: -0.5rem;
+      top: -0.5rem;
+      border-radius: 50%;
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        background: crimson;
+      }
+    }
+  }
+}
+
+.config-prefill-form {
+  right: 4rem;
+}
+
+.prefill-form {
+  left: 4rem;
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    border: 1px dashed #ccc;
+    background: #f6f6f6;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    color: #777;
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 0.6rem;
+
+    &.prefilled {
+      background: #f0f0f0;
+      border-style: groove;
+      position: relative;
+
+      .remove {
+        position: absolute;
+        top: 50%;
+        right: 0.6rem;
+        width: 0.9rem;
+        height: 0.9rem;
+        transform: translateY(-50%);
+        background: indianred;
+        border-radius: 50%;
+        &:hover,
+        &:focus {
+          background: crimson;
+        }
+      }
+
+      .field-name {
+        font-size: 0.7rem;
+        color: #aaa;
+        font-weight: 500;
+        display: block;
+        width: 100%;
+        flex-shrink: 0;
+      }
+    }
+
+    svg {
+      width: 1.1rem;
+    }
+
+    & + li {
+      margin-top: 0.6rem;
+    }
+
+    &.selected,
+    &:focus,
+    &:hover {
+      background: #f6f6ff;
+      border-color: skyblue;
+      color: steelblue;
+      cursor: pointer;
+    }
+  }
+}
+
+.options {
+  margin-top: 1rem;
+}
+
+.submenu {
+
+  .label {
+    padding: 0.2rem 0.25rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.6rem;
+    position: relative;
+    left: -0.25rem;
+    border-radius: 4px;
+
+    &:hover {
+      background: #f3f3f3;
+      cursor: pointer;
+    }
+
+    svg {
+      width: 1.1rem;
+      transform: rotate(-90deg);
+      transition: transform 0.5s ease;
+    }
+
+    &.expand svg {
+      transform: rotate(0);
+    }
+  }
+
+  ul {
+    margin: 0.5rem 0rem;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    margin: 0;
+    font-size: 0.8rem;
+    color: #777;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+
+    &:hover {
+      cursor: pointer;
+      background: #f3f3f3;
+    }
+  }
+}
+
+aside.contact {
+
+  position: fixed;
+  top: 0.8rem;
+  left: 0.8rem;
+  padding: 1rem;
+  padding-right: 1.5rem;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 0 0.25rem 0.05rem rgba(0,0,0,0.1);
+  text-align: left;
+  z-index: 1;
+
+  h1, p {
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.02rem;
+  }
+
+  h1 {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  p.loc {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.72rem;
+    color: #555;
+    font-weight: 500;
+    vertical-align: bottom;
+  }
+
+  a, span {
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin-left: 0.5rem;
+    line-height: 1.35;
+  }
+
+  span {
+    color: #000;
+  }
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

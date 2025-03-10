@@ -1,9 +1,7 @@
-import {Graph} from "./fetchGraph";
-
-export const fetchData = async (
+export const fetchData = async <T>(
   url: string,
   query?: Record<string, any>
-): Promise<Graph> => {
+): Promise<T> => {
 
   try {
     const params: string = (() => {
@@ -20,7 +18,7 @@ export const fetchData = async (
       );
     }
 
-    const data: Graph = await response.json();
+    const data: T = await response.json();
     return data;
   } catch (error) {
     console.error("Error in fetchData:", error);
